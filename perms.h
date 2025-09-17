@@ -1,6 +1,10 @@
 #ifndef AFL_2_DEMO_PERMS_H
 #define AFL_2_DEMO_PERMS_H
 
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdlib.h>
+
 struct rwe_t {
     bool read;
     bool write;
@@ -10,9 +14,7 @@ struct rwe_t {
 // TODO: Lav den interne repræsentation i struct perms_t
 // helt om, så den i stedet indeholder en enkelt uint32_t
 struct perms_t {
-    struct rwe_t user;
-    struct rwe_t group;
-    struct rwe_t others;
+    uint32_t rwe_t;
 };
 
 // Eksempel på hvordan det kan se ud:
@@ -28,6 +30,10 @@ struct ny_perms_t {
 #define GROUP_READ 8
 #define GROUP_WRITE 16
 #define GROUP_EXECUTE 32
+
+#define OTHERS_READ 64
+#define OTHERS_WRITE 128
+#define OTHERS_EXECUTE 256
 
 // Returner jeg en string, SKAL jeg heap-allokere
 char *fmt_perms(struct perms_t);
